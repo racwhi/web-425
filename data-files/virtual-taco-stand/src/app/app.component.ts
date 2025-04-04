@@ -54,13 +54,13 @@ stand"
   styles: [`
 
 .sign-in-container{
-text- align: right;
+text-align: right;
 padding-right: 20px;
 margin-top: 10px;
  }
 .sign-in-link{
 color: #000000;
-text- decoration: none;
+text-decoration: none;
 font-family: 'Lato', sans-serif;
 }
 ,
