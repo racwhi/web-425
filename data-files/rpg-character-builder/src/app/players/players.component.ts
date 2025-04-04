@@ -135,7 +135,7 @@ export class PlayersComponent {
         class: 'Warrior',
         faction: 'The Fire hood',
         startingLocation: 'Forge City',
-        funFact: 'Can battle with muany swords.',
+        funFact: 'Can battle with many swords.',
       },
       {
         name: 'Lana',
