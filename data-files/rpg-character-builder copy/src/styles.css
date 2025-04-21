@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, header, nav, main, section, footer, img, figure, figcaption, div, ul {
+margin: 0; padding: 0;
+border: 0;
+}
+body { height:
+100%;
+}
+.wrapper { display: flex;
+flex-direction: column;
+min-height: 100vh;
+margin: 0 auto; width:
+75%;
+background-color: #FFFFFF; color:
+#000000;
+}
+.banner {
+background-color: #000000; color:
+#FFFFFF;
+text-align: center;
+}
+.banner-img {
+max-width: 100%;
+height: auto;
+}
+.main-content { display:flex;
+flex: 1;
+}
+.navbar {
+background-color: #bbb7b7;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Montserrat', sans-serif;
+}
+.navbar ul {
+list-style-type:none;
+padding: 0;
+margin: 0;
+display: flex;/* flexbox for horizontal layout*/
+justify-content: center;/*center nav items*/
+}
+.navbar li { padding:
+8px;
+transition: background-color 0.3s ease, color 0.3s ease; font-family:
+'Lato', sans-serif;
+}
+
+.navbar li:hover { background-color: #F2F2F2F2; color:
+#e623ec; cursor: pointer;
+}
+.navbar a { text-decoration:
+none;
+color: inherit;
+}
+.content {
+flex: 1;
+padding: 20px;
+font-family: 'Merriweather', serif;
+}
+.footer {
+background-color: #9131ae;
+color: #FFFFFF; text-align:
+center; padding: 20px;
+font-family: 'Lato', sans-serif;
+}
+.footer a { color:
+#FFFFFF;
+text-decoration: none;
+}
+.footer a:hover {
+text-decoration: underline;
+}
+
