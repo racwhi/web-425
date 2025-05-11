@@ -28,7 +28,11 @@ describe('CreateCharacterComponent', () => {
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { CreateCharacterComponent } from './create-character.component';
+import {
+  CreateCharacterComponent,
+  Character,
+} from './create-character.component';
+//import {Character} from './create-character.component';
 
 describe('CreateCharacterComponent', () => {
   let component: CreateCharacterComponent;
@@ -36,9 +40,10 @@ describe('CreateCharacterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ 
-        CreateCharacterComponent, 
+      imports: [
+        CreateCharacterComponent,
         FormsModule
+
       ]
     }).compileComponents();
 
@@ -61,7 +66,7 @@ describe('CreateCharacterComponent', () => {
       }
     };
     component.onSubmit(characterForm);
-    
+
     expect(component.characters.length).toBe(1);
     expect(component.characters[0].name).toBe('Hero');
     expect(component.characters[0].gender).toBe('Male');
@@ -69,16 +74,19 @@ describe('CreateCharacterComponent', () => {
   });
 
   it('should reset all form fields to their default values after resetForm is called', () => {
-  
+
     component.name = 'Peter';
     component.gender = 'Male';
     component.class = 'Warrior';
 
-    component.resetForm(); 
+    component.resetForm();
 
-    expect(component.name).toBe(''); 
-    expect(component.gender).toBe(''); 
+    expect(component.name).toBe('');
+    expect(component.gender).toBe('');
     expect(component.class).toBe('');
 
   });
+
+
 });
+

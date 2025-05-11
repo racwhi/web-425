@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-create-guild',
+  selector: 'app-guild-list',
   standalone: true,
   imports: [],
   template: `
     <p>
-      create-guild works!
+      guild-list works!
     </p>
   `,
   styles: ``
 })
-export class CreateGuildComponent {
+export class GuildListComponent {
 
 }

@@ -18,9 +18,11 @@ export class CreateCharacterComponent {
 
 // create-character.component.ts
 
-import { Component } from '@angular/core';
+import { Component,EventEmitter,Output } from '@angular/core';
+import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CharacterListComponent } from '../character-list/character-list.component';
 
 export interface Character {
   id: number;
@@ -39,7 +41,13 @@ export interface Character {
       <form #characterForm="ngForm" (ngSubmit)="onSubmit(characterForm)">
         <div>
           <label for="name">Name:</label>
-          <input type="text" id="name" name="name" [(ngModel)]="name" required>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="name"
+            required
+          />
         </div>
 
         <div>
@@ -69,39 +77,45 @@ export interface Character {
       <h2>Created Characters</h2>
       <ul>
         <li *ngFor="let character of characters">
-          {{character.id}}: {{character.name}}, {{character.gender}}, {{character.class}}
+          {{ character.id }}: {{ character.name }}, {{ character.gender }},
+          {{ character.class }}
         </li>
       </ul>
     </div>
   `,
-  styles: [`
-    .create-character {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
+  styles: [
+    `
+      .create-character {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
 
-    h2 {
-      color: #333;
-    }
+      h2 {
+        color: #333;
+      }
 
-    form {
-      margin-bottom: 20px;
-    }
+      form {
+        margin-bottom: 20px;
+      }
 
-    div {
-      margin-bottom: 10px;
-    }
+      div {
+        margin-bottom: 10px;
+      }
 
-    button {
-      margin-right: 10px;
-    }
-  `]
+      button {
+        margin-right: 10px;
+      }
+    `,
+  ],
 })
 export class CreateCharacterComponent {
   characters: Character[] = [];
   name: string = '';
   gender: string = '';
   class: string = '';
+
+  // Declare the output property
+  @Output() characterCreated = new EventEmitter<Character>();
 
   onSubmit(form: any) {
     const newCharacter: Character = {
@@ -110,8 +124,10 @@ export class CreateCharacterComponent {
       gender: form.value.gender,
       class: form.value.class,
     };
+    this.characterCreated.emit(newCharacter); // Emit the new character using the output property
+
     this.characters.push(newCharacter);
-    this.resetForm();  
+    this.resetForm();
   }
 
   generateRandomId(): number {
@@ -122,8 +138,6 @@ export class CreateCharacterComponent {
     this.name = '';
     this.gender = '';
     this.class = '';
-
-  
   }
 }
 

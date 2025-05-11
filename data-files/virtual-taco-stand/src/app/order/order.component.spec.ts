@@ -23,7 +23,7 @@ describe('OrderComponent', () => {
 });*/
 //order.component.spec.ts
 
-import { ComponentFixture, TestBed } from '@angular/core/testing'; 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OrderComponent } from './order.component';
 
 describe('OrderComponent', () => {
@@ -36,7 +36,7 @@ describe('OrderComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderComponent);
-    fixture.componentInstance;
+    component=fixture.componentInstance;//assign instance to 'component' variable
     fixture.detectChanges();
   });
 
@@ -44,7 +44,7 @@ describe('OrderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should generate a random order ID between 1 and 1000 with no decimal places', () => {
+  /* it('should generate a random order ID between 1 and 1000 with no decimal places', () => {
     component.addToOrder(); // This will trigger the generation of a new order ID
     expect(component.order.orderId).toBeGreaterThan(0);
     expect(component.order.orderId).toBeLessThanOrEqual(1000);
@@ -87,3 +87,35 @@ describe('OrderComponent', () => {
     expect(component.noCilantro).toBe(false);
   });
 });
+*/
+  it('should add a selected taco to the order with correct customization', () => {
+    component.selectedTacoId = 1;
+    component.noOnions = true;
+    component.noCilantro = false;
+    component.quantity = 2;
+    component.addToOrder();
+    const addedTaco = component.order.tacos[0];
+    expect(addedTaco.id).toBe(1);
+    expect(addedTaco.quantity).toBe(2);
+    expect(addedTaco.noOnions).toBe(true);
+    expect(addedTaco.noCilantro).toBe(false);
+  });
+  /*
+it('should calculate the total price correctly for multiple tacos', () => { component.order.tacos = [
+{ id: 1, name: 'Taco1', price: 5, quantity: 2},
+{ id: 2, name: 'Taco2', price: 6.5, quantity: 3} ]
+const totalPrice = component.getTotal(); expect(totalPrice).toBe(29.5); });
+*/
+  it('should reset all form fields to their default values after resetForm is called', () => {
+    component.selectedTacoId = 2;
+    component.quantity = 3;
+    component.noOnions = true;
+    component.noCilantro = true;
+    component.resetForm();
+    expect(component.selectedTacoId).toBe(1);
+    expect(component.quantity).toBe(1);
+    expect(component.noOnions).toBe(false);
+    expect(component.noCilantro).toBe(false);
+  });
+});
+

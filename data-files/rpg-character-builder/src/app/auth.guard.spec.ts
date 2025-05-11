@@ -10,10 +10,10 @@ describe('authGuard', () => {
   let routerSpy: jasmine.SpyObj<Router>;
 
   const mockActivatedRouteSnapshot = {} as ActivatedRouteSnapshot;
-  const mockRouterStateSnapshot = {} as RouterStateSnapshot;
+  const mockRouterStateSnapshot = { url: '/test'} as RouterStateSnapshot;
 
   beforeEach(() => {
-  
+
     cookieServiceSpy = jasmine.createSpyObj('CookieService', ['get']);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
@@ -27,25 +27,29 @@ describe('authGuard', () => {
   });
 
   it('should allow access if session_user cookie exists', () => {
-    cookieServiceSpy.get.and.returnValue('some-user'); // 
+    cookieServiceSpy.get.and.returnValue('some-user');
 
-    const result = authGuard(
+    /*const result = authGuard(
       mockActivatedRouteSnapshot,
-      mockRouterStateSnapshot
+      mockRouterStateSnapshot*/
+      const result = TestBed.runInInjectionContext(()=>
+      authGuard(mockActivatedRouteSnapshot, mockRouterStateSnapshot)
     ); // Call the guard
-    expect(result).toBeTrue(); 
+    expect(result).toBeTrue();
   });
 
   it('should deny access and navigate to signin if session_user cookie does not exist', () => {
-    cookieServiceSpy.get.and.returnValue(''); 
+    cookieServiceSpy.get.and.returnValue('');
 
-    const result = authGuard(
+   /* const result = authGuard(
       mockActivatedRouteSnapshot,
-      mockRouterStateSnapshot
-    ); // Call the guard
-    expect(result).toBeFalse(); 
+      mockRouterStateSnapshot*/
+       const result = TestBed.runInInjectionContext(() =>
+         authGuard(mockActivatedRouteSnapshot, mockRouterStateSnapshot)
+       ); // Call the guard
+    expect(result).toBeFalse();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/signin'], {
       queryParams: { returnUrl: mockRouterStateSnapshot.url },
-    }); 
+    });
   });
 });

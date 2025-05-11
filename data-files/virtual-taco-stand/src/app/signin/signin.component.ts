@@ -16,17 +16,17 @@ export class SigninComponent {
 }
 */
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms'; 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,
 
-Router } from '@angular/router'; import { CommonModule } from '@angular/common'; 
+Router } from '@angular/router'; import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 
 @Component({
 selector: 'app-signin',
 standalone: true,
-imports: [ReactiveFormsModule, CommonModule], 
+imports: [ReactiveFormsModule, CommonModule],
 template: `
 <div class="signin-form-container">
 <form [formGroup]="signinForm" (ngSubmit)="signin();" class="signinform">
@@ -36,9 +36,9 @@ template: `
 <legend>User Sign In</legend>
 
 <label for="email">Email</label>
-<input formControlName="email" type="email" id="email" name="email"> 
+<input formControlName="email" type="email" id="email" name="email">
 @if (signinForm.controls['email'].touched &&
-signinForm.controls['email'].hasError('required')) { 
+signinForm.controls['email'].hasError('required')) {
   <small class="error">Email is required.</small>
 }
 @if (signinForm.controls['email'].touched && signinForm.controls['email'].hasError('email')) {
@@ -47,10 +47,10 @@ signinForm.controls['email'].hasError('required')) {
 <label for="password">Password</label>
 <input formControlName="password" id="password" type="password">
  @if (signinForm.controls['password'].touched &&
-signinForm.controls['password'].hasError('required')) { 
+signinForm.controls['password'].hasError('required')) {
   <small class="error">Password is required.</small>
 }
-@if (signinForm.controls['password'].touched && 
+@if (signinForm.controls['password'].touched &&
 signinForm.controls['password'].hasError('pattern')) {
 <small class="error">Password must be at least 8 characters long and contain at least one uppercase letter and one number.</small>
 }
@@ -67,28 +67,28 @@ width:50%; }
 
 .signin-form {
 flex: 1;
-margin-right: 20px; 
+margin-right: 20px;
 }
 
-label, input { 
+label, input {
 display: block;
-margin-bottom: 5px; 
+margin-bottom: 5px;
 }
 
-input, input[type="submit"] { 
+input, input[type="submit"] {
 padding: 8px;
 box-sizing: border-box;
 }
-input[type="email"], input[type="password"] { 
+input[type="email"], input[type="password"] {
   width: 100%;
 }
-input[type="submit"] { 
+input[type="submit"] {
 margin-top: 10px;
-float: right; 
+float: right;
 }
 
 .error { color: red;
-padding: 5px; 
+padding: 5px;
 }
 
 `
@@ -99,9 +99,9 @@ email: [null, Validators.compose([Validators.required, Validators.email])],
 password: [null, Validators.compose([Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9]).{8,}$/)])]
 });
 
-constructor( 
-private fb: FormBuilder, 
-private router: Router, 
+constructor(
+private fb: FormBuilder,
+private router: Router,
 private route: ActivatedRoute,
 private authService: AuthService) { }
 
@@ -111,31 +111,34 @@ const password = this.signinForm.controls['password'].value;
 
 if (this.authService.signin(email, password)) {
 const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-this.router.navigate([returnUrl]); 
+this.router.navigate([returnUrl]);
 } else {
 alert('Invalid email or password. Please try again.'); }
-} 
+}
 }*/
-export class SigninComponent { FormGroup = this.fb.group({
-
+export class SigninComponent {
+  signinForm: FormGroup = this.fb.group({
 email: [null, Validators.compose([Validators.required, Validators.email])],
-
 password: [null, Validators.compose([Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9]).{8,}$/)])]
 });
-  signinForm: any;
+ // signinForm: any;
 constructor(
-private fb: FormBuilder, 
-private router: Router, 
+private fb: FormBuilder,
+private router: Router,
 private route: ActivatedRoute,
 private authService: AuthService) { }
 
 signin() {
+  if(this.signinForm.valid){
 const email = this.signinForm.controls['email'].value;
 const password = this.signinForm.controls['password'].value;
 
 if (this.authService.signin(email, password)) {
 const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-this.router.navigate([returnUrl]); 
+this.router.navigate([returnUrl]);
 } else {
-alert('Invalid email or password. Please try again.'); }
-} }
+alert('Invalid email or password. Please try again.');
+}
+}
+}
+}
